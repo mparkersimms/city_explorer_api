@@ -44,15 +44,15 @@ Finish time: 7:30 pm CST
 
 Actual time needed to complete: 1 hr
 
-### Feature 2
+### Feature 3
 Number and name of feature: # 3 Weather
 
 Estimate of time needed to complete: 1 hr
 
 Start time: 7:30 pm CST
 
-Finish time: 7:30 pm CST
+Finish time: 9:00 pm CST
 
-Actual time needed to complete: 1 hr
+Actual time needed to complete: 1 hr 30min
 
 
