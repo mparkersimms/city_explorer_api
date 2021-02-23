@@ -40,7 +40,19 @@ Estimate of time needed to complete: 1 hr
 
 Start time: 6:30 pm CST
 
-Finish time: 6:30 pm CST
+Finish time: 7:30 pm CST
 
-Actual time needed to complete: 30 mins
+Actual time needed to complete: 1 hr
+
+### Feature 2
+Number and name of feature: # 3 Weather
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 7:30 pm CST
+
+Finish time: 7:30 pm CST
+
+Actual time needed to complete: 1 hr
+
 
