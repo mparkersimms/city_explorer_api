@@ -38,7 +38,7 @@ function handleGetLocation(req, res) {
         this.formatted_query = data[0].display_name;
         this.latitude = data[0].lat;
         this.longitude = data[0].lon;
-        console.log(data[0].display_name)
+        
     }
     res.send(output);
 }
