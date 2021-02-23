@@ -22,12 +22,25 @@
 -->
 ## Feature Tasks 
 
-Number and name of feature: ________________________________
+### Feature 1
+Number and name of feature: # 1 Set-up
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete:1 hr
 
-Start time: _____
+Start time: 6:00 pm CST
 
-Finish time: _____
+Finish time: 6:30 pm CST
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30 mins
+
+### Feature 2
+Number and name of feature: # 2 Locations
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 6:30 pm CST
+
+Finish time: 6:30 pm CST
+
+Actual time needed to complete: 30 mins
+
