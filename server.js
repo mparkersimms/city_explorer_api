@@ -32,24 +32,49 @@ function handleGetLocation(req, res) {
     // // }
     var search = req.query.city;
     const output = new Location(dataFromTheFile, search);
-    console.log(req);
+    // console.log(req);
     function Location(data, search) {
         this.search_query = search;
         this.formatted_query = data[0].display_name;
         this.latitude = data[0].lat;
         this.longitude = data[0].lon;
-        
+
     }
     res.send(output);
 }
-// res.send({
-//     "search_query": "seattle",
-//     "formatted_query": "Seattle, WA, USA",
-//     "latitude": "47.606210",
-//     "longitude": "-122.332071"
-//   });
 
+app.get('/weather', handleGetWeather)
+function handleGetWeather(req, res) {
+
+
+    const dataFromTheWxFile = require('./data/weather.json');
+    const wxOutput = [];
+
+    dataFromTheWxFile.data.forEach(day =>{
+        wxOutput.push(new Weather(day));
+    })
+
+    function Weather(wxData) {
+        this.forecast = wxData.weather.description;
+        this.time = wxData.valid_date;
+        console.log(wxData.weather.description);
+        console.log(wxData.valid_date);
+
+    }
+    res.send(wxOutput);
+}
+
+
+// [{
+//     "forecast": "Partly cloudy until afternoon.",
+//     "time": "Mon Jan 01 2001"
+// },
+// {
+//     "forecast": "Mostly cloudy in the morning.",
+//     "time": "Tue Jan 02 2001"
+// }
+
+// ])
 // ================== Initialization====================
 
 app.listen(PORT, () => console.log('app is up on http://localhost:' + PORT));
-
