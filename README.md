@@ -77,3 +77,16 @@ Finish time: 6:57 pm CST
 
 Actual time needed to complete: 1hr 27 mins. 
 
+### Feature 6
+Number and name of feature: # 5 Weather from superagent
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 7:11 pm CST
+
+Finish time: 8:05 pm CST
+
+Actual time needed to complete: 54 mins  
+
+
+
