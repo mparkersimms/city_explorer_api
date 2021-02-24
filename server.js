@@ -21,25 +21,16 @@ app.use(cors());
 const PORT = process.env.PORT || 3099;
 // console.log(process.env.PORT);
 // ================== Routes. ==========================
-console.log(process.env.GEOCODE_API_KEY)
+// console.log(process.env.GEOCODE_API_KEY)
 
 
 app.get('/location', handleGetLocation)
 function handleGetLocation(req, res) {
-    // const dataFromTheFile = require('./data/location.json');
-    // // const output = {
-    // //     search_query: '',
-    // //     formatted_query: dataFromTheFile,
-    // //     latitude: '',
-    // //     longitude: ''
-    // // }
     var search = req.query.city;
-    // console.log(req);
-    
+    console.log(req.query);
     superagent.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.GEOCODE_API_KEY}&q=${search}&format=json`)
         .then(data => { console.log(data.body[0])
             const output = new Location(data.body[0], search);
-        
             res.send(output);
         })
         .catch(errorThatComesBack => {
@@ -57,22 +48,27 @@ function handleGetLocation(req, res) {
 
 app.get('/weather', handleGetWeather)
 function handleGetWeather(req, res) {
+    console.log("in the weather", req.query);
+    
+    superagent.get(`http://api.weatherbit.io/v2.0/current?key=${process.env.WEATHER_API_KEY}&lat=${req.query.latitude}&lon=${req.query.longitude}`)
+        .then(weatherData => { console.log(weatherData.body.data)
 
-
-    const dataFromTheWxFile = require('./data/weather.json');
-
-    const wxArr = dataFromTheWxFile.data.map(wxOutput);
-
-    function wxOutput(day){
-        return new Weather(day);
-    }
+            const wxArr = weatherData.body.data.map(wxOutput);
+            function wxOutput(day){
+                return new Weather(day);
+            }
+            res.send(wxArr);
+        })
+        .catch(errorThatComesBack => {
+            res.status(500).send(errorThatComesBack)
+        })
 
     function Weather(wxData) {
         this.forecast = wxData.weather.description;
-        this.time = wxData.valid_date;
+        this.time = wxData.datetime;
     }
 
-    res.send(wxArr);
+
 }
 
 
