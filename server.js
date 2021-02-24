@@ -11,6 +11,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const superagent = require('superagent');
 
 // ================== app ==============================
 
@@ -20,10 +21,12 @@ app.use(cors());
 const PORT = process.env.PORT || 3099;
 // console.log(process.env.PORT);
 // ================== Routes. ==========================
+console.log(process.env.GEOCODE_API_KEY)
+
 
 app.get('/location', handleGetLocation)
 function handleGetLocation(req, res) {
-    const dataFromTheFile = require('./data/location.json');
+    // const dataFromTheFile = require('./data/location.json');
     // // const output = {
     // //     search_query: '',
     // //     formatted_query: dataFromTheFile,
@@ -31,16 +34,25 @@ function handleGetLocation(req, res) {
     // //     longitude: ''
     // // }
     var search = req.query.city;
-    const output = new Location(dataFromTheFile, search);
     // console.log(req);
+    
+    superagent.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.GEOCODE_API_KEY}&q=${search}&format=json`)
+        .then(data => { console.log(data.body[0])
+            const output = new Location(data.body[0], search);
+        
+            res.send(output);
+        })
+        .catch(errorThatComesBack => {
+            res.status(500).send(errorThatComesBack)
+        })
+
     function Location(data, search) {
         this.search_query = search;
-        this.formatted_query = data[0].display_name;
-        this.latitude = data[0].lat;
-        this.longitude = data[0].lon;
+        this.formatted_query = data.display_name;
+        this.latitude = data.lat;
+        this.longitude = data.lon;
 
     }
-    res.send(output);
 }
 
 app.get('/weather', handleGetWeather)
@@ -48,20 +60,19 @@ function handleGetWeather(req, res) {
 
 
     const dataFromTheWxFile = require('./data/weather.json');
-    const wxOutput = [];
 
-    dataFromTheWxFile.data.forEach(day =>{
-        wxOutput.push(new Weather(day));
-    })
+    const wxArr = dataFromTheWxFile.data.map(wxOutput);
+
+    function wxOutput(day){
+        return new Weather(day);
+    }
 
     function Weather(wxData) {
         this.forecast = wxData.weather.description;
         this.time = wxData.valid_date;
-        console.log(wxData.weather.description);
-        console.log(wxData.valid_date);
-
     }
-    res.send(wxOutput);
+
+    res.send(wxArr);
 }
 
 

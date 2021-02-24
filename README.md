@@ -55,4 +55,25 @@ Finish time: 9:00 pm CST
 
 Actual time needed to complete: 1 hr 30min
 
+### Feature 4
+Number and name of feature: # 4 Weather update with .map
+
+Estimate of time needed to complete: 30mins
+
+Start time: 5:19 pm CST
+
+Finish time: 5:45 pm CST
+
+Actual time needed to complete: 26 mins. 
+
+### Feature 5
+Number and name of feature: # 5 Locations from superagent
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 5:30 pm CST
+
+Finish time: 6:57 pm CST
+
+Actual time needed to complete: 1hr 27 mins. 
 
