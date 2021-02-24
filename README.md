@@ -18,6 +18,7 @@ Use this area to document the iterative changes made to your application as each
 
 02-23-2021 5:59pm - Application has a fully functional location API feature
 02-23-2021 7:59pm - Application has a fully functional weather API feature based on the location the user types into the search bar.
+02-23-2021 9:54pm - Application has a fully functional parks API feature that populates parks based on the city the user searched for
 
 ## Credits and Collaborations
 
@@ -83,7 +84,7 @@ Finish time: 6:57 pm CST
 Actual time needed to complete: 1hr 27 mins. 
 
 ### Feature 6
-Number and name of feature: # 5 Weather from superagent
+Number and name of feature: # 6 Weather from superagent
 
 Estimate of time needed to complete: 2hrs
 
@@ -93,5 +94,13 @@ Finish time: 8:05 pm CST
 
 Actual time needed to complete: 54 mins  
 
+### Feature 7
+Number and name of feature: # 7 parks from superagent
 
+Estimate of time needed to complete: 2hrs
 
+Start time: 8:17 pm CST
+
+Finish time: 9:54 pm CST
+
+Actual time needed to complete:1 hr 37 min

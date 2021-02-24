@@ -29,7 +29,8 @@ function handleGetLocation(req, res) {
     var search = req.query.city;
     console.log(req.query);
     superagent.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.GEOCODE_API_KEY}&q=${search}&format=json`)
-        .then(data => { console.log(data.body[0])
+        .then(data => {
+            console.log(data.body[0])
             const output = new Location(data.body[0], search);
             res.send(output);
         })
@@ -49,12 +50,13 @@ function handleGetLocation(req, res) {
 app.get('/weather', handleGetWeather)
 function handleGetWeather(req, res) {
     console.log("in the weather", req.query);
-    
-    superagent.get(`http://api.weatherbit.io/v2.0/current?key=${process.env.WEATHER_API_KEY}&lat=${req.query.latitude}&lon=${req.query.longitude}`)
-        .then(weatherData => { console.log(weatherData.body.data)
+
+    superagent.get(`http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.latitude}&lon=${req.query.longitude}`)
+        .then(weatherData => {
+            console.log("in the weather.then", weatherData.body.data)
 
             const wxArr = weatherData.body.data.map(wxOutput);
-            function wxOutput(day){
+            function wxOutput(day) {
                 return new Weather(day);
             }
             res.send(wxArr);
@@ -70,18 +72,31 @@ function handleGetWeather(req, res) {
 
 
 }
+app.get('/parks', handleGetParks)
+function handleGetParks(req, res) {
+    console.log("in the park", req.query.formatted_query);
+    superagent.get(`https://developer.nps.gov/api/v1/parks?limit=5&start=0&q=${req.query.formatted_query}&sort=&api_key=${process.env.PARKS_API_KEY}`)
+        .then(parkData => {
+            const parkInfo = parkData.body.data.map(parkOutput)
+            function parkOutput(info) {
+                return new Park(info);
+            }
 
+            res.send(parkInfo);
+        })
+        .catch(errorThatComesBack => {
+            res.status(500).send(errorThatComesBack)
+        });
 
-// [{
-//     "forecast": "Partly cloudy until afternoon.",
-//     "time": "Mon Jan 01 2001"
-// },
-// {
-//     "forecast": "Mostly cloudy in the morning.",
-//     "time": "Tue Jan 02 2001"
-// }
+    function Park(parkData) {
+        this.name = parkData.fullName;
+        this.address = parkData.addresses[0].line2 + " " + parkData.addresses[0].city + " " + parkData.addresses[0].stateCode + " " + parkData.addresses[0].postalCode ;
+        this.fee = parkData.entranceFees[0].cost;
+        this.description = parkData.description;
+        this.url = parkData.url
+    }
 
-// ])
+}
 // ================== Initialization====================
 
 app.listen(PORT, () => console.log('app is up on http://localhost:' + PORT));
