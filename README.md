@@ -19,11 +19,15 @@ Use this area to document the iterative changes made to your application as each
 02-23-2021 5:59pm - Application has a fully functional location API feature
 02-23-2021 7:59pm - Application has a fully functional weather API feature based on the location the user types into the search bar.
 02-23-2021 9:54pm - Application has a fully functional parks API feature that populates parks based on the city the user searched for
+02-24-2021 6:23pm - Application has an up and running database. 
+02-24-2021 9:10pm - Application has an up and running server that stores information that has already been searched for.
 
 ## Credits and Collaborations
 
-Sara Russert helped with the weather API
+Sara Russert helped with the weather API and getting the database setup
+Nicholas Carignan helped me with finding the information thats on the database
 Kristian  helped with getting superagent started
+
 
 
 ## Feature Tasks 
@@ -104,3 +108,36 @@ Start time: 8:17 pm CST
 Finish time: 9:54 pm CST
 
 Actual time needed to complete:1 hr 37 min
+
+### Feature 8
+Number and name of feature: # 8 database
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 5:08 pm CST
+
+Finish time:6:23 pm CST
+
+Actual time needed to complete: 1 hr 15 min
+
+### Feature 9
+Number and name of feature: # 9 server
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 6:28 pm CST
+
+Finish time:9:04 pm CST
+
+Actual time needed to complete: 2 hr 26 min
+
+### Feature 10
+Number and name of feature: # 10 deploy
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 9:15 pm CST
+
+Finish time:
+
+Actual time needed to complete: 
