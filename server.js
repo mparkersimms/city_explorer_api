@@ -13,6 +13,7 @@ const cors = require('cors');
 require('dotenv').config();
 const superagent = require('superagent');
 const pg = require('pg');
+const { resolveSoa } = require('dns');
 
 // ================== app ==============================
 
@@ -138,6 +139,55 @@ function handleGetParks(req, res) {
     }
 
 }
+
+app.get('/movies', handleGetMovies)
+function handleGetMovies(req, res) {
+    // console.log('in the movies', req.query);
+    superagent.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${req.query.search_query}&page=1`)
+        .then(movieData => {
+            // console.log("in the movies", movieData.body, "in the movies");
+            const movieInfo = movieData.body.results.map(movieOutput)
+            function movieOutput(info) {
+                return new Movie(info);
+            }
+            res.send(movieInfo.slice(0, 5));
+        })
+        .catch(errorThatComesBack => {
+            res.status(500).send(errorThatComesBack)
+        });
+    function Movie(data) {
+        this.title = data.original_title;
+        this.overview = data.overview;
+        this.average_votes = data.vote_average;
+        this.total_votes = data.vote_count;
+        this.image_url = 'https://image.tmdb.org/t/p/w500' + data.poster_path;
+        this.popularity = data.popularity;
+        this.released_on = data.release_date
+
+    }
+}
+app.get('/yelp', handleGetYelp);
+function handleGetYelp(req, res) {
+    console.log("in yelp", req.query);
+    superagent.get(`https://api.yelp.com/v3/businesses/search?term=restaurant&limit=5&latitude=${req.query.latitude}&longitude=${req.query.longitude}`)
+        .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
+        .then(yelpData => {
+            console.log(yelpData.body)
+            const yelpInfo = yelpData.body.businesses.map(yelpOutput)
+            function yelpOutput(info) {
+                return new Restaurant(info);
+            }
+            res.send(yelpInfo)
+        })
+    function Restaurant(data) {
+        this.name = data.name;
+        this.image_url = data.image_url;
+        this.price = data.price;
+        this.rating = data.rating;
+        this.url = data.url
+    }
+}
+
 // ================== Initialization====================
 
 client.connect().then(() => {
