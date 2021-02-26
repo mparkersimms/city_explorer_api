@@ -21,6 +21,7 @@ Use this area to document the iterative changes made to your application as each
 02-23-2021 9:54pm - Application has a fully functional parks API feature that populates parks based on the city the user searched for
 02-24-2021 6:23pm - Application has an up and running database. 
 02-24-2021 9:10pm - Application has an up and running server that stores information that has already been searched for.
+02-24-2021 9:10pm - Application has an up and running server on heroku. 
 
 ## Credits and Collaborations
 
@@ -138,6 +139,6 @@ Estimate of time needed to complete: 2hrs
 
 Start time: 9:15 pm CST
 
-Finish time:
+Finish time: 9:53 pm CST
 
-Actual time needed to complete: 
+Actual time needed to complete: 38 mins
